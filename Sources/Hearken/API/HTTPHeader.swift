@@ -9,6 +9,8 @@ public enum HTTPHeader {
     public enum ContentType: String {
         /// `application/json` content type.
         case json = "application/json"
+        
+        case html = "text/html"
 
         /// `application/x-www-form-urlencoded` content type.
         case urlEncodedForm = "application/x-www-form-urlencoded"

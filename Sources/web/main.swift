@@ -1,4 +1,4 @@
-import Hearken
+import libWeb
 
 let server = Server(port: 8080, isLoggingEnabled: true)
 
@@ -13,14 +13,5 @@ server[.GET, "/api/health"] = HTTPResponse(status: .ok,
           """
 )
 
-server[.POST, "/api/hello"] = { _ in
-    .init(status: .ok,
-          headers: [.contentType(.json)],
-          body: """
-                {
-                    "hello": "world"
-                }
-                """)
-}
 
 try server.syncStart()

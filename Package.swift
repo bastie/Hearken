@@ -2,18 +2,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "Hearken",
+    name: "web",
     products: [
-        .library(name: "Hearken", targets: ["Hearken"]),
-        .executable(name: "HearkenExample", targets: ["HearkenExample"])
+        .library(name: "libWeb", targets: ["libWeb"]),
+        .executable(name: "web", targets: ["web"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.19.0"),
     ],
     targets: [
-        .target(name: "Hearken", dependencies: [
+        .target(name: "libWeb", dependencies: [
             .product(name: "NIOHTTP1", package: "swift-nio")
         ]),
-        .target(name: "HearkenExample", dependencies: ["Hearken"]),
+        .target(name: "web", dependencies: ["libWeb"]),
     ]
 )

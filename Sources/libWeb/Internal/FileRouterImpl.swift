@@ -27,18 +27,26 @@ public final class FileRouterImpl : Router {
                 fileManager.fileExists(atPath: requestedFilePath, isDirectory: &isDir)
                 if (isDir.boolValue) {
                     body =  """
-                            <html><body><h1>DIRECTORY BROWSING NOT SUPPORTED</h1></body></html>
+                            <html><body><h1>driectory browsing is forbidden</h1></body></html>
                             """
+                    result = HTTPResponse(status: .forbidden, headers: [.contentType(.html)], body: HTTPBody(stringLiteral: body))
                 }
                 else {
-                    body =  """
-                            <html><body><h1>FILE REQUESTED</h1></body></html>
-                            """
+                    let url = URL (fileURLWithPath: requestedFilePath)
+                    if let content = try? HTTPBody (contentsOf: url) {
+                        result = HTTPResponse (status: .ok, headers: [], body: content)
+                    }
+                    else {
+                        body =  """
+                                <html><body><small>server error</small></body></html>
+                                """
+                        result = HTTPResponse(status: .internalServerError, headers: [.contentType(.html)], body: HTTPBody(stringLiteral: body))
+                    }
                 }
             }
-
-            result = HTTPResponse(status: .notFound, headers: [.contentType(.html)],
-            body: HTTPBody(stringLiteral: body))
+            else {
+                result = HTTPResponse(status: .notFound, headers: [.contentType(.html)], body: HTTPBody(stringLiteral: body))
+            }
         }
         return result
     }

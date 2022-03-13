@@ -2,12 +2,12 @@ import libWeb
 
 let server = Server(port: 8080, isLoggingEnabled: true, routeImpl: FileRouterImpl())
 
-server[.GET, "/api/health"] = HTTPResponse(status: .ok,
+server[.GET, "/api/"] = HTTPResponse(status: .ok,
                                            headers: [.contentType(.html)],
     body: """
           <htlm>
           <body>
-          <h1>TEST</h1>
+          <small>API not yet implemented<small>
           </body>
           </html>
           """

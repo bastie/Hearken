@@ -1,4 +1,4 @@
-final class Router {
+final class DefaultRouter : Router {
     var routes: [HTTPRoute: (HTTPRequest) -> HTTPResponse] = [:]
 
     func route(request: HTTPRequest) -> HTTPResponse? {
@@ -6,3 +6,4 @@ final class Router {
             .map { $0.value(request) }
     }
 }
+

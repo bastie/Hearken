@@ -50,7 +50,7 @@ import NIOHTTP1
 /// ```
 public final class Server {
     private let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    private let router = Router()
+    private let router = DefaultRouter()
     private let logger: LoggerType
     private let requestHandler: RequestHandler
     private let host = "localhost"

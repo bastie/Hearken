@@ -65,9 +65,9 @@ public final class Server {
 
     /// Creates an instance of an `HTTP` `Server`.
     /// - Parameters:
-    ///   - port: The port to bind to. Defaults to `8888`.
+    ///   - port: The port to bind to. Defaults to `8080`.
     ///   - isLoggingEnabled: Enables logging to `stdout`. Defaults to `false`.
-    public convenience init(port: Int = 8888, isLoggingEnabled: Bool = false) {
+    public convenience init(port: Int = 8080, isLoggingEnabled: Bool = false) {
         self.init(port: port, logger: Logger(isEnabled: isLoggingEnabled))
     }
 }
@@ -94,7 +94,7 @@ public extension Server {
         guard isRunning else { return }
         isRunning = false
         try group.syncShutdownGracefully()
-        logger.log(title: "Hearken", content: "Server was shut down gracefully")
+        logger.log(title: "web", content: "Server was shut down gracefully")
     }
 
     /// A custom subscript to assign routes to the `Server` with a closure that returns an `HTTPResponse`.
@@ -153,7 +153,7 @@ private extension Server {
             .bind(host: host, port: port)
             .wait()
 
-        logger.log(title: "Hearken", content: "Server running on \(host):\(port)")
+        logger.log(title: "web", content: "Server running on \(host):\(port)")
 
         return channel
     }

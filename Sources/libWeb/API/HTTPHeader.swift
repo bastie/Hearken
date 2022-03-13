@@ -6,6 +6,7 @@ import NIOHTTP1
 /// but any header can be created using `.custom(name: String, value: String)`.
 public enum HTTPHeader {
     /// Values for the `Content-Type` `HTTP` header.
+    // TODO: why not use file --mime-type <file>
     public enum ContentType: String {
         /// `application/json` content type.
         case json = "application/json"

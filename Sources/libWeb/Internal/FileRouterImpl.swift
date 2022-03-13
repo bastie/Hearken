@@ -1,5 +1,4 @@
 import Foundation
-import System
 
 public final class FileRouterImpl : Router {
     public init (){}
@@ -24,7 +23,7 @@ public final class FileRouterImpl : Router {
                   """
             if fileManager.fileExists(atPath: requestedFilePath) {
                 var isDir : ObjCBool = false
-                fileManager.fileExists(atPath: requestedFilePath, isDirectory: &isDir)
+                let _ = fileManager.fileExists(atPath: requestedFilePath, isDirectory: &isDir)
                 if (isDir.boolValue) {
                     body =  """
                             <html><body><h1>driectory browsing is forbidden</h1></body></html>

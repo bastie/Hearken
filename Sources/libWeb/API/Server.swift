@@ -50,14 +50,15 @@ import NIOHTTP1
 /// ```
 public final class Server {
     private let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    private let router = DefaultRouter()
+    private var router : Router
     private let logger: LoggerType
     private let requestHandler: RequestHandler
     private let host = "localhost"
     private let port: Int
     private var isRunning = false
 
-    init(port: Int, logger: LoggerType) {
+    init(port: Int, logger: LoggerType, routeImpl : Router) {
+        self.router = routeImpl
         self.port = port
         self.logger = logger
         self.requestHandler = RequestHandler(router: router, logger: logger)
@@ -67,8 +68,8 @@ public final class Server {
     /// - Parameters:
     ///   - port: The port to bind to. Defaults to `8080`.
     ///   - isLoggingEnabled: Enables logging to `stdout`. Defaults to `false`.
-    public convenience init(port: Int = 8080, isLoggingEnabled: Bool = false) {
-        self.init(port: port, logger: Logger(isEnabled: isLoggingEnabled))
+    public convenience init(port: Int = 8080, isLoggingEnabled: Bool = false, routeImpl : Router) {
+        self.init(port: port, logger: Logger(isEnabled: isLoggingEnabled), routeImpl: routeImpl)
     }
 }
 

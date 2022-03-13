@@ -1,4 +1,4 @@
-final class DefaultRouter : Router {
+final class DefaultRouterImpl : Router {
     var routes: [HTTPRoute: (HTTPRequest) -> HTTPResponse] = [:]
 
     func route(request: HTTPRequest) -> HTTPResponse? {

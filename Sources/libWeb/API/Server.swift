@@ -53,11 +53,12 @@ public final class Server {
     private var router : Router
     private let logger: LoggerType
     private let requestHandler: RequestHandler
-    private let host = "localhost"
+    private var host = "localhost"
     private let port: Int
     private var isRunning = false
 
-    init(port: Int, logger: LoggerType, routeImpl : Router) {
+    init(ip: String, port: Int, logger: LoggerType, routeImpl : Router) {
+        self.host = ip
         self.router = routeImpl
         self.port = port
         self.logger = logger
@@ -68,8 +69,8 @@ public final class Server {
     /// - Parameters:
     ///   - port: The port to bind to. Defaults to `8080`.
     ///   - isLoggingEnabled: Enables logging to `stdout`. Defaults to `false`.
-    public convenience init(port: Int = 8080, isLoggingEnabled: Bool = false, routeImpl : Router) {
-        self.init(port: port, logger: Logger(isEnabled: isLoggingEnabled), routeImpl: routeImpl)
+    public convenience init(ip : String = "localhost", port: Int = 8080, isLoggingEnabled: Bool = false, routeImpl : Router) {
+        self.init(ip: ip, port: port, logger: Logger(isEnabled: isLoggingEnabled), routeImpl: routeImpl)
     }
 }
 

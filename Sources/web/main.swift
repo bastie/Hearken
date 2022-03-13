@@ -25,7 +25,7 @@ for value in CommandLine.arguments {
     offset += 1
 }
 
-let server = Server(ip: IP, port: port, isLoggingEnabled: true, routeImpl: FileRouterImpl())
+let server = Server(ip: IP, port: port, isLoggingEnabled: false, routeImpl: FileRouterImpl())
 
 server[.GET, "/api/"] = HTTPResponse(status: .ok,
                                            headers: [.contentType(.html)],

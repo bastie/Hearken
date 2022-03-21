@@ -1,5 +1,6 @@
 import Foundation
 
+/// Simple ``Router`` protocol implementation to provide files from underlying filesystems.
 public final class FileRouterImpl : Router {
     public init (){}
     
@@ -26,7 +27,7 @@ public final class FileRouterImpl : Router {
                 let _ = fileManager.fileExists(atPath: requestedFilePath, isDirectory: &isDir)
                 if (isDir.boolValue) {
                     body =  """
-                            <html><body><h1>driectory browsing is forbidden</h1></body></html>
+                            <html><body><h1>directory browsing is forbidden</h1></body></html>
                             """
                     result = HTTPResponse(status: .forbidden, headers: [.contentType(.html)], body: HTTPBody(stringLiteral: body))
                 }

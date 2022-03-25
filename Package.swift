@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
@@ -14,6 +14,6 @@ let package = Package(
         .target(name: "libWeb", dependencies: [
             .product(name: "NIOHTTP1", package: "swift-nio")
         ]),
-        .target(name: "web", dependencies: ["libWeb"]),
+        .executableTarget(name: "web", dependencies: ["libWeb"]),
     ]
 )

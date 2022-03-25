@@ -1,4 +1,5 @@
 import Foundation
+import KnightLife
 
 /// Simple ``Router`` protocol implementation to provide files from underlying filesystems.
 public final class FileRouterImpl : Router {
@@ -23,9 +24,7 @@ public final class FileRouterImpl : Router {
                   </html>
                   """
             if fileManager.fileExists(atPath: requestedFilePath) {
-                var isDir : ObjCBool = false
-                let _ = fileManager.fileExists(atPath: requestedFilePath, isDirectory: &isDir)
-                if (isDir.boolValue) {
+                if IOFacade.isDirectory(atPath: requestedFilePath) {
                     body =  """
                             <html><body><h1>directory browsing is forbidden</h1></body></html>
                             """
@@ -49,18 +48,5 @@ public final class FileRouterImpl : Router {
             }
         }
         return result
-    }
-}
-
-
-
-extension FileManager {
-    func isDirectory(atPath: String) -> Bool {
-        var check: ObjCBool = false
-        if fileExists(atPath: atPath, isDirectory: &check) {
-            return check.boolValue
-        } else {
-            return false
-        }
     }
 }
